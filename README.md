@@ -25,4 +25,6 @@ By attaching high-fidelity environmental sensors (**BME688 & BMV080**) to a mobi
 * 💸 **Cost-Effective:** It replaces thousand-dollar stationary rigs with a highly affordable, custom-engineered mobile pod.
 * 🎯 **Pinpoint Accuracy:** It provides exact, real-time, daily measurements of the immediate surroundings rather than relying on generic map approximations.
 
----
+### 🤖 Development & Documentation
+* **Hardware Engineering:** CAD, routing, and thermal simulations were done 100% manually,NO ARTIFICIAL INTELLINGENCE WERE USED.
+* **Documentation:** Repository formatting, Markdown UI, and documentation refinement were DONE WITH HELP OF AI assistance to rapidly translate raw engineering specifications into a readable, Stardance-ready project brief. 
