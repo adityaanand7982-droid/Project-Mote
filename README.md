@@ -8,7 +8,7 @@ A high-altitude, open-source data collection payload engineered for drone deploy
 * **Autonomous Data Logging:** Native MicroSD card integration writes sequential `.csv` telemetry directly to memory for post-flight analysis.
 * **Sensors:** Features the Bosch BME688 (microclimate) and Bosch BMV080 (particulates) operating on a shared I2C bus.
 * **Custom Housing:** Designed for weight efficency and max flight duration and avoiding damiging the sensors.
-## 🔄 System Architecture: The Symbiotic Flight Loop
+## System Architecture: The Symbiotic Flight Loop
 
 Project-Mote is designed with a core engineering philosophy: the drone is not just a delivery vehicle; it is an active, integrated component of the payload. The hardware and software stacks operate in a continuous, synchronized cycle during flight.
 
