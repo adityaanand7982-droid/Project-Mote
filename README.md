@@ -20,6 +20,9 @@ The payload chassis was designed entirely from scratch in Onshape. It features a
 ## PCB Design
 
 <img width="2160" height="729" alt="PCB_PCB1_2026-09-07" src="https://github.com/user-attachments/assets/0299e733-5b0b-443b-bc24-d2a34fb54bfa" />
+ ** SCHMATICS 
+ <img width="2362" height="1672" alt="SCH_Schematic1_1-P1_2026-09-07" src="https://github.com/user-attachments/assets/a3e56888-0b53-4e16-8c67-d26edc81bc35" />
+
 The brain of the payload(Pod) is a custom-routed EasyEDA carrier board designed specifically for the **Seeed Studio XIAO ESP32-S3 Sense**. 
 
 ![PCB Design](./images/pcb_layout.png)
