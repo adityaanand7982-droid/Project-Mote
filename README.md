@@ -13,6 +13,8 @@ A high-altitude, open-source data collection payload engineered for drone deploy
 
 The payload chassis was designed entirely from scratch in Onshape. It features aggressive mass-reduction cutouts, hexagonal structural grilles, and cutouts acting mainly for weight reduction and thermal managment and clip on mechanism for really easy setup. 
 
+<img width="1365" height="641" alt="image" src="https://github.com/user-attachments/assets/381950c1-374d-4b0f-b441-afdeba5d33da" />
+
 * **CAD Source:** [Link to Onshape Workspace]
 * **Print Settings:** I recommend Poly Carbonate(PC-ABS) for the battry encloser and the Sensor Pod for maintaining the weight low and provide the heat resistance. 
 * **Production Files:** `.stl` and `.glb` files are located in the `/CAD` folder.
