@@ -1,5 +1,5 @@
 # Project-Mote
-![PCB Design](https://i.postimg.cc/TKBKftph/PCB-PCB1-2026-09-07.png)
+<img src="https://i.postimg.cc/TKBKftph/PCB-PCB1-2026-09-07.png" width="100%" alt="Cyber-Spider PCB Design">
 
 A high-altitude, open-source data collection payload engineered for drone deployment. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
 
