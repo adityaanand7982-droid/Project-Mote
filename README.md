@@ -1,6 +1,4 @@
 # Project-Mote
-<img width="2160" height="729" alt="PCB_PCB1_2026-09-07" src="https://github.com/user-attachments/assets/0299e733-5b0b-443b-bc24-d2a34fb54bfa" />
-
 A high-altitude, open-source data collection payload engineered for drone deployment. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
 
 ## Custom Features
@@ -21,6 +19,7 @@ The payload chassis was designed entirely from scratch in Onshape. It features a
 
 ## PCB Design
 
+<img width="2160" height="729" alt="PCB_PCB1_2026-09-07" src="https://github.com/user-attachments/assets/0299e733-5b0b-443b-bc24-d2a34fb54bfa" />
 The brain of the payload(Pod) is a custom-routed EasyEDA carrier board designed specifically for the **Seeed Studio XIAO ESP32-S3 Sense**. 
 
 ![PCB Design](./images/pcb_layout.png)
