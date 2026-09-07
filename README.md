@@ -8,7 +8,7 @@ A high-altitude, open-source data collection payload engineered for drone deploy
 * **Autonomous Data Logging:** Native MicroSD card integration writes sequential `.csv` telemetry directly to memory for post-flight analysis.
 * **Sensors:** Features the Bosch BME688 (microclimate) and Bosch BMV080 (particulates) operating on a shared I2C bus.
 * **Custom Housing:** Designed for weight efficency and max flight duration and to avoid damiging the sensors.
-## System Architecture: The Symbiotic Flight Loop
+## System Architecture
 
 I made this project with exactly core philosphy: It should be very reiliable, cheap and ready to go at anytime when needed and the hardware and software stacks operate in a continuous, synchronized cycle during flight.
 
