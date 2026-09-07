@@ -10,16 +10,13 @@ A high-altitude, open-source data collection payload engineered for drone deploy
 * **Custom Housing:** Designed for weight efficency and max flight duration and to avoid damiging the sensors.
 ## System Architecture: The Symbiotic Flight Loop
 
-Project-Mote is designed with a core engineering philosophy: the drone is not just a delivery vehicle; it is an active, integrated component of the payload. The hardware and software stacks operate in a continuous, synchronized cycle during flight.
-
-Here is the exact step-by-step breakdown of how the system functions in the air:
+I made this project with exactly core philosphy: It should be very reiliable, cheap and ready to go at anytime when needed and the hardware and software stacks operate in a continuous, synchronized cycle during flight.
 
 ### 1. Mechanical & Aerodynamic Integration
 * **Ram-Air Pumping:** The pod deliberately lacks internal fans. It relies entirely on the drone’s forward pitch and flight velocity to force ambient air through the custom 3D-printed venturi grilles. The drone's physical movement acts as the system's air pump, ensuring zero air stagnation.
-* **Parasitic-Free Power:** While the drone and pod share a data link, they do not share a power draw. The payload runs on its own independent, high-efficiency Li-ion cell. This guarantees the environmental sensors never drain the flight controller's battery or compromise maximum flight time.
 
-### 2. The Data & Telemetry Handshake
-* **Microclimate Polling:** At exactly 5-second intervals, the "Cyber-Spider" PCB acts as the mission commander, pinging the onboard BME688 and BMV080 sensors over the I2C bus to capture a real-time snapshot of the immediate atmosphere.
+### 2. The Data & Telemetry
+* **Microclimate Polling:** At few intervals, the "Cyber-Spider" PCB acts as the mission commander, pinging the onboard BME688 and BMV080 sensors over the I2C bus to capture a real-time snapshot of the immediate atmosphere.
 * **The Drone as an Antenna:** To strictly minimize mass, the pod carries no GPS hardware. Instead, the ESP32 is wired directly to the flight controller's serial port. It passively intercepts the drone’s native MAVLink telemetry stream, stripping out the live latitude, longitude, and altitude data.
 
 ### 3. Command and Logging
