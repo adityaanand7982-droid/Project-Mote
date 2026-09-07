@@ -1,30 +1,47 @@
-<div align="center">
-  <h1>🌍 Project-Mote: Airborne Microclimate & Pollution Tracker 🚁</h1>
-  <p><i>A custom-engineered environmental telemetry payload for Hack Club Stardance</i></p>
-</div>
+# Project-Mote 🛰️
 
----
+![Project Mote Hero Image](./images/hero_render.png)
 
-### 🌿 The Mission Directive
-I have wanted to build this project for a long time. I have a deep love for plants and nature, but with current environmental issues and global conflicts, the habitats of flora and fauna are being severely disrupted. **Project-Mote** is a custom-engineered drone payload designed to monitor these environmental changes firsthand.
+A high-altitude, open-source data collection payload engineered for drone deployment. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
 
----
+## ⚙️ Custom Features
 
-### ⚠️ The Problem (System Critical)
-* 🛑 **High Cost & Fixed Locations:** Professional pollution meters cost thousands of dollars and are strictly stationary. They can only measure the exact spot they are bolted to.
-* ❌ **Approximations vs. Reality:** While you can check pollution levels on weather apps or Google/Apple Maps, that data is based on broad regional assumptions and approximations, not *true* ground-level measurements.
+* **Venturi Airflow Dynamics:** Custom-engineered internal channeling prevents air stagnation, ensuring sensors sample live ambient air during flight.
+* **Li-Ion Flight Platform:** Runs entirely on a standard high-efficiency Li-ion cell, eliminating heavy LiPo packs to maximize airborne observation time and minimize mass.
+* **Autonomous Data Logging:** Native MicroSD card integration writes sequential `.csv` telemetry directly to memory for post-flight analysis.
+* **Aerospace-Grade Sensors:** Features the Bosch BME688 (microclimate) and SparkFun BMV080 (particulates) operating on a shared I2C bus.
 
----
+## 🖨️ 3D Printing & Mechanical
 
-### ⚡ The Solution (Project-Mote Deployment)
-By attaching high-fidelity environmental sensors (**BME688 & BMV080**) to a mobile drone, this payload completely changes how we capture environmental data:
+The payload chassis was designed entirely from scratch in Onshape. It features aggressive mass-reduction cutouts, hexagonal structural grilles, and a sliding dovetail rail for seamless drone integration. 
 
-* 🚀 **True Mobility:** It is non-stationary. It can fly to cover massive distances, providing a much larger dynamic field of view for pollution tracking.
-* 🧊 **3D Data Collection:** It measures real-time changes in microclimates across varying heights and altitudes, not just flat ground data.
-* 🌋 **Extreme Accessibility:** It gathers data in hazardous or hard-to-reach locations without requiring human intervention (e.g., above dense forests, high mountains, heavily populated areas, or even active volcanoes).
-* 💸 **Cost-Effective:** It replaces thousand-dollar stationary rigs with a highly affordable, custom-engineered mobile pod.
-* 🎯 **Pinpoint Accuracy:** It provides exact, real-time, daily measurements of the immediate surroundings rather than relying on generic map approximations.
+* **CAD Source:** [Link to Onshape Workspace]
+* **Print Settings:** We recommend PETG for thermal resistance during outdoor deployments. 
+* **Production Files:** `.stl` and `.glb` files are located in the `/CAD` folder.
 
-### 🤖 Development & Documentation
-* **Hardware Engineering:** CAD, routing, and thermal simulations were done 100% manually,NO ARTIFICIAL INTELLINGENCE WERE USED.
-* **Documentation:** Repository formatting, Markdown UI, and documentation refinement were DONE WITH HELP OF AI assistance to rapidly translate raw engineering specifications into a readable, Stardance-ready project brief. 
+## 🕷️ PCB Design: The "Cyber-Spider"
+
+The brain of the payload is a custom-routed EasyEDA carrier board designed specifically for the **Seeed Studio XIAO ESP32-S3 Sense**. 
+
+![Cyber Spider PCB](./images/pcb_layout.png)
+
+* **Production Files:** Gerber files and the CPL are available in the `/Releases` tab.
+* **Schematics:** View the full wiring diagram in the `/Hardware` folder.
+
+## 💻 Firmware
+
+The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus initialization, and the continuous data-logging loop. 
+
+* **Status:** Active Development
+* **Source:** Check the `/Firmware` folder for the main `.ino` or PlatformIO `main.cpp` files.
+
+## 📋 BOM (Bill of Materials)
+
+* [Seeed Studio XIAO ESP32-S3 Sense](link)
+* [Bosch BME688 Breakout](link)
+* [SparkFun BMV080 Breakout](link)
+* **General PCB BOM:** [Link to JLCPCB CSV]
+
+## 📜 License
+
+This project is fully open-source and licensed under the MIT License.
