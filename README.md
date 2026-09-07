@@ -1,6 +1,6 @@
 # Project-Mote
 
-![Project Mote Hero Image](./images/hero_render.png)
+![Project Mote Hero Image](./<a href='https://postimg.cc/TKBKftph' target='_blank'><img src='https://i.postimg.cc/TKBKftph/PCB-PCB1-2026-09-07.png' border='0' alt='PCB-PCB1-2026-09-07'></a>)
 
 A high-altitude, open-source data collection payload engineered for drone deployment. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
 
