@@ -52,7 +52,7 @@ The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus
 ## BOM (Bill of Materials) For genral components
 
 * [Seeed Studio XIAO ESP32-S3 Sense](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html)
-* [Bosch BMV080 Breakout(ive designed the pod for specifically for SparkFun Air Quality Sensor - BMV080 breakout board but theres one more you can use -DFRobot Fermion BMV080, its almost the same size just slightly bigger which also include mounting holes)](https://www.sparkfun.com/sparkfun-air-quality-pm1-pm2-5-pm10-sensor-bmv080-qwiic.html )
+* [Bosch BMV080 Breakout]([https://www.sparkfun.com/sparkfun-air-quality-pm1-pm2-5-pm10-sensor-bmv080-qwiic.html])(ive designed the pod for specifically for SparkFun Air Quality Sensor - BMV080 breakout board but theres one more you can use -DFRobot Fermion BMV080, its almost the same size just slightly bigger which also include mounting holes)]
 * [Bosch BME688 Breakout](link)
 * **General PCB BOM:** [Link to JLCPCB CSV]
 * ** NOTE: The frame, The pod, the camera encloser and the Battry Encloser are custom designed.
