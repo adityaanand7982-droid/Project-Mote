@@ -1,4 +1,5 @@
-https://github.com/user-attachments/assets/62625b15-3040-47bc-abc4-9f3462d0d825# Project-Mote
+
+# Project-Mote
 A high-altitude, open-source data collection drone engineered for measuring the microclimates across various places. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
 ## Custom Features 
 
