@@ -1,0 +1,335 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PROJECT-MOTE // Airborne Microclimate &amp; Pollution Tracker</title>
+<meta name="description" content="Project-Mote: a custom-engineered drone payload for airborne microclimate & pollution tracking. Hack Club Stardance Mission." />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background-color: #030303; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid #00ffcc; outline-offset: 4px; }
+  :root { --bg:#030303; --surface:#0A0A0A; --text:#f0f0f0; --meta:#a0a0a0; --cyan:#00ffcc; --red:#ff0055; --grid:#1a1a1a; }
+  .mono { font-family: 'Courier New', Courier, monospace; }
+  .cyan { color: var(--cyan); } .red { color: var(--red); } .meta { color: var(--meta); }
+  .surface { background-color: var(--surface); }
+  .glow-cyan { box-shadow: 0 0 20px rgba(0,255,204,.25), 0 0 40px rgba(0,255,204,.1); }
+  .glow-red { box-shadow: 0 0 20px rgba(255,0,85,.25), 0 0 40px rgba(255,0,85,.1); }
+  .text-glow-cyan { text-shadow: 0 0 12px rgba(0,255,204,.5); }
+  .text-glow-red { text-shadow: 0 0 12px rgba(255,0,85,.5); }
+  .grid-bg { background-image: linear-gradient(to right, rgba(26,26,26,1) .5px, transparent .5px), linear-gradient(to bottom, rgba(26,26,26,1) .5px, transparent .5px); background-size: 8.333% 100%, 100% 8.333%; }
+  .scanlines { background-image: repeating-linear-gradient(to bottom, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 3px); }
+  .overlay { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+  .overlay .scan { position: absolute; inset: 0; opacity: .6; }
+  .overlay .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%); }
+  .wrap { max-width: 1152px; margin: 0 auto; padding: 0 20px; }
+  section { position: relative; padding: 96px 0; }
+  @media (min-width: 640px) { section { padding: 128px 0; } }
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+  .eyebrow .bar { display: inline-block; height: 1px; width: 40px; }
+  .sec-title { margin-top: 12px; font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -.02em; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal-x { opacity: 0; transform: translateX(40px); transition: opacity .6s ease-out, transform .6s ease-out; }
+  .reveal-x.in { opacity: 1; transform: none; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 96px 20px 64px; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-bg .shade { position: absolute; inset: 0; background: rgba(0,0,0,.7); }
+  .hero-bg .grad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3,3,3,.4) 0%, rgba(3,3,3,.2) 40%, rgba(3,3,3,.95) 100%); }
+  .hero .grid-bg { position: absolute; inset: 0; opacity: .3; z-index: 1; }
+  .status-bar { position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; justify-content: space-between; padding: 20px; font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: var(--meta); }
+  @media (min-width: 640px){ .status-bar{ padding: 20px 40px; } }
+  .status-bar .live { color: var(--cyan); }
+  .hero-content { position: relative; z-index: 20; max-width: 1152px; margin: 0 auto; width: 100%; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 768px){ .hero-grid{ grid-template-columns: 3fr 1fr; } .hero-grid > div + div{ padding-left: 24px; border-left: 1px solid var(--grid); } }
+  .hero .tag { font-size: 12px; letter-spacing: .4em; text-transform: uppercase; color: var(--meta); }
+  .hero h1 { margin-top: 16px; font-weight: 700; line-height: .95; letter-spacing: -.03em; }
+  .hero h1 .l1 { display: block; font-size: clamp(2.25rem, 7vw, 5rem); color: var(--text); }
+  .hero h1 .rule { display: block; height: 1px; margin: 14px 0; background: rgba(0,255,204,.6); transform-origin: left; animation: grow .8s ease-out .4s both; }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .hero h1 .l2 { display: block; font-size: clamp(1.05rem, 3vw, 1.875rem); color: var(--cyan); text-shadow: 0 0 14px rgba(0,255,204,.5); }
+  .hero .sub { margin-top: 24px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--meta); }
+  .hero .sub .sep { margin: 0 12px; color: var(--cyan); }
+  .intro-feed { margin-top: 32px; }
+  @media (min-width: 768px){ .intro-feed{ margin-top: 0; } }
+  .intro-feed .label { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+  .intro-feed p { font-size: 14px; color: var(--meta); max-width: 320px; }
+  .scroll-cue { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 20; }
+  .scroll-cue span { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--meta); }
+  .scroll-cue .line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--cyan), transparent); animation: bob 1.6s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(8px);} }
+  .problem .x-mark { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 40vw; font-weight: 700; line-height: 1; color: var(--red); opacity: .04; user-select: none; pointer-events: none; }
+  .problem .grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px; }
+  @media (min-width: 768px){ .problem .grid{ grid-template-columns: 5fr 7fr; } }
+  .problem .img-wrap { position: relative; overflow: hidden; border-left: 4px solid var(--red); }
+  .problem .img-wrap img { width: 100%; height: 320px; object-fit: cover; }
+  .problem .img-wrap .grad { position: absolute; inset: 0; background: linear-gradient(to top, #030303, transparent); }
+  .problem .img-wrap .tag { position: absolute; bottom: 12px; left: 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--red); }
+  .err-log { position: relative; border-left: 4px solid var(--red); padding: 16px 0 16px 20px; background: var(--surface); margin-bottom: 24px; }
+  .err-log .code { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--red); }
+  .err-log .dot { display: inline-block; height: 8px; width: 8px; border-radius: 50%; background: var(--red); animation: pulse-r 2.4s ease-in-out infinite; }
+  @keyframes pulse-r { 0%,100%{ box-shadow: 0 0 8px rgba(255,0,85,.6);} 50%{ box-shadow: 0 0 18px rgba(255,0,85,.9);} }
+  .err-log h3 { margin-top: 8px; font-size: 18px; font-weight: 700; color: var(--text); }
+  .err-log p { margin-top: 8px; font-size: 14px; color: var(--meta); }
+  .solution .head { border-right: 4px solid var(--cyan); padding-right: 16px; }
+  .solution .intro { margin-top: 24px; max-width: 768px; font-size: 16px; color: var(--meta); }
+  .slabs { margin-top: 48px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 640px){ .slabs{ grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px){ .slabs{ grid-template-columns: repeat(3, 1fr); } }
+  .slab { position: relative; background: var(--surface); border: 1px solid var(--grid); padding: 24px; transition: border-color .3s, box-shadow .3s; }
+  .slab:hover { border-color: rgba(0,255,204,.6); box-shadow: 0 0 20px rgba(0,255,204,.25); }
+  .slab .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .slab .icon { height: 56px; width: 56px; opacity: .7; transition: opacity .3s; }
+  .slab:hover .icon { opacity: 1; }
+  .slab .icon svg { width: 100%; height: 100%; }
+  .slab .code { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); }
+  .slab h3 { margin-top: 20px; font-size: 18px; font-weight: 700; color: var(--text); }
+  .slab p { margin-top: 8px; font-size: 14px; color: var(--meta); }
+  .slab .underline { margin-top: 20px; height: 1px; width: 0; background: var(--cyan); transition: width .5s; }
+  .slab:hover .underline { width: 100%; }
+  .stat-tile { background: var(--surface); border: 1px solid var(--grid); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+  .stat-tile .big { font-size: 48px; font-weight: 700; color: var(--cyan); text-shadow: 0 0 14px rgba(0,255,204,.5); }
+  .stat-tile .ready { display: flex; align-items: center; gap: 8px; font-size: 10px; color: var(--cyan); }
+  .stat-tile .dot { height: 8px; width: 8px; border-radius: 50%; background: var(--cyan); animation: pulse-c 2.4s ease-in-out infinite; }
+  @keyframes pulse-c { 0%,100%{ box-shadow: 0 0 8px rgba(0,255,204,.6);} 50%{ box-shadow: 0 0 18px rgba(0,255,204,.9);} }
+  .hw .grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px; }
+  @media (min-width: 1024px){ .hw .grid{ grid-template-columns: 7fr 5fr; } }
+  .hw .img-wrap { position: relative; overflow: hidden; border: 1px solid var(--grid); }
+  .hw .img-wrap img { width: 100%; height: 384px; object-fit: cover; }
+  .hw .img-wrap .grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,3,3,.8), transparent); }
+  .hw .img-wrap .tag { position: absolute; bottom: 12px; left: 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); }
+  .hotspot { position: absolute; transform: translate(-50%,-50%); background: none; border: none; cursor: pointer; }
+  .hotspot .ring { display: block; height: 16px; width: 16px; border-radius: 50%; border: 2px solid var(--cyan); animation: pulse-c 2.4s ease-in-out infinite; }
+  .hotspot .halo { position: absolute; left: 50%; top: 50%; height: 32px; width: 32px; transform: translate(-50%,-50%); border-radius: 50%; border: 1px solid rgba(0,255,204,.4); }
+  .comp-btn { display: flex; width: 100%; align-items: center; justify-content: space-between; border: 1px solid var(--grid); background: var(--surface); padding: 12px 16px; text-align: left; cursor: pointer; transition: border-color .2s; margin-bottom: 8px; }
+  .comp-btn:hover { border-color: rgba(0,255,204,.6); }
+  .comp-btn .role { display: block; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; color: var(--cyan); }
+  .comp-btn .name { display: block; margin-top: 2px; font-size: 14px; color: var(--text); }
+  .comp-btn .arrow { color: var(--cyan); font-size: 12px; opacity: 0; transition: opacity .2s; }
+  .comp-btn:hover .arrow { opacity: 1; }
+  .drawer { position: fixed; right: 0; top: 0; height: 100%; width: 100%; max-width: 448px; background: var(--surface); border-left: 2px solid var(--cyan); box-shadow: 0 0 20px rgba(0,255,204,.25); padding: 32px; transform: translateX(100%); transition: transform .4s ease-out; z-index: 60; overflow-y: auto; }
+  .drawer.open { transform: none; }
+  .drawer .close { position: absolute; right: 20px; top: 20px; color: var(--cyan); background: none; border: none; font-size: 20px; cursor: pointer; }
+  .drawer .ds-label { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); }
+  .drawer h3 { margin-top: 12px; font-size: 20px; font-weight: 700; color: var(--cyan); text-shadow: 0 0 14px rgba(0,255,204,.5); }
+  .drawer p { margin-top: 20px; font-size: 14px; color: var(--meta); }
+  .drawer .sep { margin: 32px 0 16px; height: 1px; background: var(--grid); }
+  .drawer .status { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--meta); }
+  .drawer .status .v { color: var(--cyan); }
+  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 55; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  .backdrop.open { opacity: 1; pointer-events: auto; }
+  .deploy .grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 48px; }
+  @media (min-width: 640px){ .deploy .grid{ grid-template-columns: repeat(2, 1fr); } }
+  .zone { position: relative; overflow: hidden; border: 1px solid var(--grid); background: var(--surface); transition: border-color .2s; }
+  .zone:hover { border-color: rgba(0,255,204,.6); }
+  .zone .img-wrap { position: relative; height: 256px; overflow: hidden; }
+  .zone .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s; }
+  .zone:hover .img-wrap img { transform: scale(1.05); }
+  .zone .img-wrap .grad { position: absolute; inset: 0; background: linear-gradient(to top, #030303, rgba(3,3,3,.4) 40%, transparent); }
+  .zone .img-wrap .grid-bg { position: absolute; inset: 0; opacity: .2; mix-blend-mode: screen; }
+  .zone .img-wrap .zcode { position: absolute; top: 12px; left: 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); }
+  .zone .img-wrap .ztag { position: absolute; top: 12px; right: 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--meta); }
+  .zone .body { padding: 20px; }
+  .zone h3 { font-size: 18px; font-weight: 700; color: var(--text); }
+  .zone .underline { margin-top: 12px; height: 1px; width: 0; background: var(--cyan); transition: width .5s; }
+  .zone:hover .underline { width: 100%; }
+  .dev .grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 48px; }
+  @media (min-width: 768px){ .dev .grid{ grid-template-columns: repeat(2, 1fr); } }
+  .dev-card { border-left: 4px solid var(--cyan); padding: 20px 0 20px 20px; background: var(--surface); }
+  .dev-card .label { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); }
+  .dev-card h3 { margin-top: 12px; font-size: 18px; font-weight: 700; color: var(--text); }
+  .dev-card p { margin-top: 8px; font-size: 14px; color: var(--meta); }
+  .dev-card .hi { color: var(--cyan); }
+  .actions { margin-top: 56px; }
+  .actions .label { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--meta); margin-bottom: 16px; }
+  .action-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 640px){ .action-grid{ grid-template-columns: repeat(2, 1fr); } }
+  .action { position: relative; display: flex; align-items: center; justify-content: space-between; border: 2px solid var(--cyan); padding: 32px; background: var(--surface); animation: pulse-c 2.4s ease-in-out infinite; transition: background-color .2s; }
+  .action:hover { background: rgba(0,255,204,.05); }
+  .action .small { display: block; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); }
+  .action .big { display: block; margin-top: 8px; font-size: 24px; font-weight: 700; color: var(--cyan); text-shadow: 0 0 14px rgba(0,255,204,.5); }
+  .action .sub { display: block; margin-top: 4px; font-size: 12px; color: var(--meta); }
+  .action svg { height: 32px; width: 32px; color: var(--cyan); transition: transform .2s; }
+  .action:hover svg { transform: scale(1.1); }
+  footer { position: relative; z-index: 10; margin-top: 96px; border-top: 1px solid var(--grid); padding: 32px 20px; }
+  footer .row { max-width: 1152px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--meta); }
+  @media (min-width: 640px){ footer .row{ flex-direction: row; } }
+  footer .end { color: var(--cyan); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal, .reveal-x { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="overlay" aria-hidden="true"><div class="scan scanlines"></div><div class="vignette"></div></div>
+
+<section class="hero" id="hero" aria-label="Mission Brief">
+  <div class="hero-bg">
+    <img src="<img width="635" height="512" alt="Screenshot 2026-09-05 221047" src="https://github.com/user-attachments/assets/6d402d47-5510-4a2a-912a-13e5124baee7">/ alt="Project-Mote drone payload render" />
+    <div class="shade"></div><div class="grad"></div>
+  </div>
+  <div class="grid-bg"></div>
+  <div class="status-bar">
+    <span class="live">● SYS::ONLINE</span>
+    <span>STARDANCE // MISSION LOG</span>
+    <span>UTC 2026.09.05</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-grid">
+      <div>
+        <div class="tag mono">[00:00:00] MISSION BRIEF</div>
+        <h1 class="mono">
+          <span class="l1">PROJECT-MOTE</span>
+          <span class="rule"></span>
+          <span class="l2">AIRBORNE MICROCLIMATE<br>&amp; POLLUTION TRACKER</span>
+        </h1>
+        <p class="sub mono">Hack Club Stardance Mission<span class="sep">/</span>Lead Engineer: Aryabhart Tenjuku</p>
+      </div>
+      <div class="intro-feed">
+        <div class="label mono">// INTRO_FEED</div>
+        <p class="mono">I have wanted to build this project for a long time. I have a deep love for plants and nature, but with current environmental issues and global conflicts, the habitats of flora and fauna are being severely disrupted. <span class="cyan">Project-Mote is a custom-engineered drone payload designed to monitor these environmental changes firsthand.</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="mono">SCROLL TO DEPLOY</span><div class="line"></div></div>
+</section>
+
+<section class="problem" id="problem" aria-label="The Problem">
+  <div class="x-mark mono" aria-hidden="true">✕</div>
+  <div class="wrap" style="position:relative; z-index:10;">
+    <div class="eyebrow mono reveal"><span class="meta">[01]</span><span class="bar" style="background:var(--red)"></span><span class="meta">SYSTEM CRITICAL</span></div>
+    <h2 class="sec-title mono red text-glow-red reveal" style="color:var(--red);">// THE PROBLEM</h2>
+    <div class="grid">
+      <div class="img-wrap reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Real-time_Particulate_Matter_Sensor_%288118c90f-2657-48ca-8191-fc77de7a47cf%29.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled" alt="Rusted stationary weather station" />
+        <div class="grad"></div>
+        <div class="tag mono">◉ STATIONARY.SENSOR.PROBLEM</div>
+      </div>
+      <div>
+        <article class="err-log glow-red reveal-x">
+          <div class="code mono"><span class="dot"></span>ERR-01</div>
+          <h3 class="mono">High Cost &amp; Fixed Locations</h3>
+          <p class="mono">Professional pollution meters cost thousands of dollars and are strictly stationary. They can only measure the exact spot they are bolted to.</p>
+        </article>
+        <article class="err-log glow-red reveal-x">
+          <div class="code mono"><span class="dot"></span>ERR-02</div>
+          <h3 class="mono">Approximations vs. Reality</h3>
+          <p class="mono">While you can check pollution levels on weather apps or Google/Apple Maps, that data is based on broad regional assumptions and approximations, not true ground-level measurements.I'm building a high-altitude data collection tool, not a smart thermostat..</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solution" id="solution" aria-label="The Solution">
+  <div class="wrap" style="position:relative; z-index:10;">
+    <div class="head glow-cyan">
+      <div class="eyebrow mono reveal"><span class="meta">[02]</span><span class="bar" style="background:var(--cyan)"></span><span class="meta">PROJECT-MOTE DEPLOYMENT</span></div>
+      <h2 class="sec-title mono cyan text-glow-cyan reveal" style="color:var(--cyan);">// THE SOLUTION</h2>
+    </div>
+    <p class="intro mono reveal">By attaching high-fidelity environmental sensors (<span class="cyan"> Bosch BME688</span> &amp; <span class="cyan">BMV080</span>) to a small drone, this payload completely changes how we capture and measure environmental data:</p>
+    <div class="slabs">
+      <article class="slab reveal"><div class="top"><div class="icon"><svg viewBox="0 0 120 120" fill="none" stroke="#00ffcc" stroke-width="1"><rect x="40" y="48" width="40" height="24" rx="3"/><circle cx="60" cy="60" r="6"/><line x1="40" y1="60" x2="20" y2="40"/><line x1="80" y1="60" x2="100" y2="40"/><line x1="40" y1="60" x2="20" y2="80"/><line x1="80" y1="60" x2="100" y2="80"/><circle cx="20" cy="40" r="10"/><circle cx="100" cy="40" r="10"/><circle cx="20" cy="80" r="10"/><circle cx="100" cy="80" r="10"/><line x1="50" y1="72" x2="50" y2="86"/><line x1="70" y1="72" x2="70" y2="86"/><line x1="44" y1="86" x2="76" y2="86"/></svg></div><span class="code mono">SOL-01</span></div><h3 class="mono">True Mobility</h3><p class="mono">It is non-stationary. It can fly to cover massive distances, providing a much larger dynamic field of view for pollution tracking like you can see around your house witihin the drones range .</p><div class="underline"></div></article>
+      <article class="slab reveal"><div class="top"><div class="icon"><svg viewBox="0 0 120 120" fill="none" stroke="#00ffcc" stroke-width="1"><rect x="40" y="48" width="40" height="24" rx="3"/><circle cx="60" cy="60" r="6"/><line x1="40" y1="60" x2="20" y2="40"/><line x1="80" y1="60" x2="100" y2="40"/><line x1="40" y1="60" x2="20" y2="80"/><line x1="80" y1="60" x2="100" y2="80"/><circle cx="20" cy="40" r="10"/><circle cx="100" cy="40" r="10"/><circle cx="20" cy="80" r="10"/><circle cx="100" cy="80" r="10"/><line x1="50" y1="72" x2="50" y2="86"/><line x1="70" y1="72" x2="70" y2="86"/><line x1="44" y1="86" x2="76" y2="86"/></svg></div><span class="code mono">SOL-02</span></div><h3 class="mono">3D Data Collection</h3><p class="mono">It measures real-time changes in microclimates across varying heights and altitudes, not just flat ground data which also helps to obserbe day to day change in polloution level of cities we live and our surroundings.</p><div class="underline"></div></article>
+      <article class="slab reveal"><div class="top"><div class="icon"><svg viewBox="0 0 120 120" fill="none" stroke="#00ffcc" stroke-width="1"><rect x="40" y="48" width="40" height="24" rx="3"/><circle cx="60" cy="60" r="6"/><line x1="40" y1="60" x2="20" y2="40"/><line x1="80" y1="60" x2="100" y2="40"/><line x1="40" y1="60" x2="20" y2="80"/><line x1="80" y1="60" x2="100" y2="80"/><circle cx="20" cy="40" r="10"/><circle cx="100" cy="40" r="10"/><circle cx="20" cy="80" r="10"/><circle cx="100" cy="80" r="10"/><line x1="50" y1="72" x2="50" y2="86"/><line x1="70" y1="72" x2="70" y2="86"/><line x1="44" y1="86" x2="76" y2="86"/></svg></div><span class="code mono">SOL-03</span></div><h3 class="mono">Extreme Accessibility</h3><p class="mono">It gathers data in hazardous or hard-to-reach locations without requiring human intervention — like above dense forests, high mountains, heavily populated areas, or even active volcanoes to take measurements which further helps in many studies and sutaible control measures to be taken foregranted.</p><div class="underline"></div></article>
+      <article class="slab reveal"><div class="top"><div class="icon"><svg viewBox="0 0 120 120" fill="none" stroke="#00ffcc" stroke-width="1"><rect x="40" y="48" width="40" height="24" rx="3"/><circle cx="60" cy="60" r="6"/><line x1="40" y1="60" x2="20" y2="40"/><line x1="80" y1="60" x2="100" y2="40"/><line x1="40" y1="60" x2="20" y2="80"/><line x1="80" y1="60" x2="100" y2="80"/><circle cx="20" cy="40" r="10"/><circle cx="100" cy="40" r="10"/><circle cx="20" cy="80" r="10"/><circle cx="100" cy="80" r="10"/><line x1="50" y1="72" x2="50" y2="86"/><line x1="70" y1="72" x2="70" y2="86"/><line x1="44" y1="86" x2="76" y2="86"/></svg></div><span class="code mono">SOL-04</span></div><h3 class="mono">Cost-Effective</h3><p class="mono">It replaces thousand-dollar stationary measuring instruments with a highly affordable, custom-engineered and made 3d printable pod which houses the sensors and the microcontroller. And to provide a much longer flight time for measurements the whole system gets powered by Li-ion cell not the typical Li-po battery pack.</p><div class="underline"></div></article>
+      <article class="slab reveal"><div class="top"><div class="icon"><svg viewBox="0 0 120 120" fill="none" stroke="#00ffcc" stroke-width="1"><rect x="40" y="48" width="40" height="24" rx="3"/><circle cx="60" cy="60" r="6"/><line x1="40" y1="60" x2="20" y2="40"/><line x1="80" y1="60" x2="100" y2="40"/><line x1="40" y1="60" x2="20" y2="80"/><line x1="80" y1="60" x2="100" y2="80"/><circle cx="20" cy="40" r="10"/><circle cx="100" cy="40" r="10"/><circle cx="20" cy="80" r="10"/><circle cx="100" cy="80" r="10"/><line x1="50" y1="72" x2="50" y2="86"/><line x1="70" y1="72" x2="70" y2="86"/><line x1="44" y1="86" x2="76" y2="86"/></svg></div><span class="code mono">SOL-05</span></div><h3 class="mono">Pinpoint Accuracy</h3><p class="mono">It provides exact, real-time, daily measurements of the immediate surroundings rather than relying on generic map approximations which is used mainly by online maps.</p><div class="underline"></div></article>
+      <div class="stat-tile reveal">
+        <div class="mono" style="font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--meta);">// TELEMETRY</div>
+        <div><div class="big mono">5x</div><p class="mono" style="margin-top:8px; font-size:12px; color:var(--meta);">Operational advantages over large stationary rigs</p></div>
+        <div class="ready mono"><span class="dot"></span>DEPLOYMENT READY</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hw" id="hardware" aria-label="Hardware and Architecture Specifications">
+  <div class="wrap" style="position:relative; z-index:10;">
+    <div class="eyebrow mono reveal"><span class="meta">[03]</span><span class="bar" style="background:var(--cyan)"></span><span class="meta">GROUND TRUTH</span></div>
+    <h2 class="sec-title mono cyan text-glow-cyan reveal" style="color:var(--cyan);">// HARDWARE &amp; ARCHITECTURE</h2>
+    <div class="grid">
+      <div class="img-wrap reveal">
+        <img src="https://github.com/user-attachments/assets/62625b15-3040-47bc-abc4-9f3462d0d825" alt="Project-Mote PCB macro with Cyber-Spider silkscreen" />
+        <div class="grad"></div>
+        <button class="hotspot" style="top:42%; left:48%;" data-comp="env" aria-label="Inspect BME688"><span class="ring"></span><span class="halo"></span></button>
+        <button class="hotspot" style="top:62%; left:30%;" data-comp="mcu" aria-label="Inspect ESP32-S3"><span class="ring"></span><span class="halo"></span></button>
+        <button class="hotspot" style="top:75%; left:65%;" data-comp="pcb" aria-label="Inspect PCB"><span class="ring"></span><span class="halo"></span></button>
+        <div class="tag mono">◉ EXPLODED.VIEW // CLICK HOTSPOTS</div>
+      </div>
+      <div>
+        <button class="comp-btn reveal-x" data-comp="mcu"><span><span class="role mono">Microcontroller</span><span class="name mono">XIAO ESP32-S3 Sense</span></span><span class="arrow mono">→</span></button>
+        <button class="comp-btn reveal-x" data-comp="env"><span><span class="role mono">Environmental Sensor</span><span class="name mono">Bosch BME688</span></span><span class="arrow mono">→</span></button>
+        <button class="comp-btn reveal-x" data-comp="laser"><span><span class="role mono">Laser Particulate Sensor</span><span class="name mono">Bosch BMV080</span></span><span class="arrow mono">→</span></button>
+        <button class="comp-btn reveal-x" data-comp="chassis"><span><span class="role mono">Mechanical Chassis</span><span class="name mono">Custom 3D-Printed Pod</span></span><span class="arrow mono">→</span></button>
+        <button class="comp-btn reveal-x" data-comp="pcb"><span><span class="role mono">PCB Design</span><span class="name mono">Custom Carrier Board</span></span><span class="arrow mono">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-label="Component datasheet">
+  <button class="close" id="drawerClose" aria-label="Close datasheet">✕</button>
+  <div class="ds-label mono" id="dsLabel">DATASHEET</div>
+  <h3 class="mono" id="dsName"></h3>
+  <p class="mono" id="dsBody"></p>
+  <div class="sep"></div>
+  <div class="status mono">STATUS: <span class="v">VERIFIED</span></div>
+</aside>
+
+<section class="deploy" id="deployment" aria-label="Deployment Environments">
+  <div class="wrap" style="position:relative; z-index:10;">
+    <div class="eyebrow mono reveal"><span class="meta">[04]</span><span class="bar" style="background:var(--cyan)"></span><span class="meta">TESTING ZONES</span></div>
+    <h2 class="sec-title mono cyan text-glow-cyan reveal" style="color:var(--cyan);">// DEPLOYMENT ENVIRONMENTS</h2>
+    <div class="grid">
+      <article class="zone reveal"><div class="img-wrap"><img src="https://media.base44.com/images/public/6a9c25798a3bcf9c182c2ff4/0e0d353e0_generated_7dabacd5.jpg" alt="Active volcano caldera" /><div class="grad"></div><div class="grid-bg"></div><div class="zcode mono">◉ ZONE-01</div><div class="ztag mono">EXTREME THERMAL</div></div><div class="body"><h3 class="mono">Active Volcano Calderas</h3><div class="underline"></div></div></article>
+      <article class="zone reveal"><div class="img-wrap"><img src="https://media.base44.com/images/public/6a9c25798a3bcf9c182c2ff4/0d574f4ad_generated_0f5b8372.jpg" alt="Dense forest canopy" /><div class="grad"></div><div class="grid-bg"></div><div class="zcode mono">◉ ZONE-02</div><div class="ztag mono">BIODIVERSITY</div></div><div class="body"><h3 class="mono">Dense Forest Canopies</h3><div class="underline"></div></div></article>
+      <article class="zone reveal"><div class="img-wrap"><img src="https://media.base44.com/images/public/6a9c25798a3bcf9c182c2ff4/371beac59_generated_9c632351.jpg" alt="High-altitude mountain peak" /><div class="grad"></div><div class="grid-bg"></div><div class="zcode mono">◉ ZONE-03</div><div class="ztag mono">ALTITUDE STRESS</div></div><div class="body"><h3 class="mono">High-Altitude Mountain Peaks</h3><div class="underline"></div></div></article>
+      <article class="zone reveal"><div class="img-wrap"><img src="https://media.base44.com/images/public/6a9c25798a3bcf9c182c2ff4/cc1992062_generated_cd02ddc0.jpg" alt="Dense urban microclimate" /><div class="grad"></div><div class="grid-bg"></div><div class="zcode mono">◉ ZONE-04</div><div class="ztag mono">ANTHROPOGENIC</div></div><div class="body"><h3 class="mono">Dense Urban Microclimates</h3><div class="underline"></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="dev" id="dev" aria-label="Development and Documentation">
+  <div class="wrap" style="position:relative; z-index:10;">
+    <div class="eyebrow mono reveal"><span class="meta">[05]</span><span class="bar" style="background:var(--cyan)"></span><span class="meta">BUILD LOG</span></div>
+    <h2 class="sec-title mono cyan text-glow-cyan reveal" style="color:var(--cyan);">// DEVELOPMENT &amp; DOCUMENTATION</h2>
+    <div class="grid">
+      <article class="dev-card glow-cyan reveal"><div class="label mono">01 // HARDWARE ENGINEERING</div><h3 class="mono">Manual Building.NO ARTIFICIAL INTELLIGENCE USED.</h3><p class="mono">CAD, Layout, and Design <span class="hi">100% manually by my own mind</span> — every trace, ducts, and dovetail engineered by my own hand.</p></article>
+      <article class="dev-card glow-cyan reveal"><div class="label mono">02 // DOCUMENTATION</div><h3 class="mono">AI-Assisted Refinement</h3><p class="mono">Repository formatting, UI design, and documentation refinement generated with AI assistance to showcase the specs into a readable Stardance-ready project brief.</p></article>
+    </div>
+    <div class="actions">
+      <div class="label mono">// ACTION_GRID</div>
+      <div class="action-grid">
+        <a class="action" href="https://github.com/adityaanand7982-droid/Project-Mote" target="_blank" rel="noopener noreferrer"><span><span class="small mono">REPOSITORY</span><span class="big mono">GitHub Repository</span><span class="sub mono">Source code, schematics &amp; build logs</span></span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.83 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.42-2.69 5.39-5.25 5.68.42.36.79 1.07.79 2.16v3.2c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg></a>
+        <a class="action" href="https://onshape.com" target="_blank" rel="noopener noreferrer"><span><span class="small mono">3D CAD</span><span class="big mono">Onshape Workspace</span><span class="sub mono">3D CAD models &amp; assemblies</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <footer><div class="row mono"><span>PROJECT-MOTE // <span class="cyan">STARDANCE</span></span><span>LEAD ENGINEER: ARYABHART TENJUKU</span><span class="end">● END_OF_LOG</span></div></footer>
+</section>
+
+<script>
+  var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal, .reveal-x').forEach(function(el){ io.observe(el); });
+  var DATA = {
+    mcu: { role: 'Microcontroller', name: 'XIAO ESP32-S3 Sense', body: 'Ultra-compact ESP32-S3 MCU with dual-core 240MHz, integrated Wi-Fi + BLE 5.0, and ample GPIO for sensor aggregation. Drives the shared I2C bus and handles telemetry uplink. And with a SD card for all the data storage that gets collected by the sensors and all telemetry data.' },
+    env: { role: 'Environmental Sensor', name: 'Bosch BME688', body: '4-in-1 digital sensor measuring gas (VOC), humidity, temperature, and pressure. On-chip AI gas scanner classifies air quality with high fidelity.' },
+    laser: { role: 'Laser Particulate Sensor', name: 'Bosch BMV080', body: 'Laser-based particulate matter sensor detecting PM1.0 / PM2.5 / PM10 with photometric precision. Compact form factor ideal for airborne payloads.' },
+    chassis: { role: 'Mechanical Chassis', name: 'Custom 3D-Printed Pod', body: 'I designed a low-profile aerodynamic pod(which is inspired by the design of a hypersonic air intake of missiles) with a sliding dovetail rail system for rapid mounting and a custom internal venturi thermal airflow ducting to channel air across the sensors(for measurement) and it exists directly over the ESP32 metal plate which makes it cools down and control temprature and blcks heat from entering the sensor chamber(which may cause false measurements).' },
+    pcb: { role: 'PCB Design', name: 'Custom Carrier Board', body: 'I also designed a custom carrier board with shared I2C bus routing and some silkscreen artwork. Hand-routed in EasyEDA for tight signal integrity.' }
+  };
+  var drawer = document.getElementById('drawer'), backdrop = document.getElementById('backdrop');
+  var dsLabel = document.getElementById('dsLabel'), dsName = document.getElementById('dsName'), dsBody = document.getElementById('dsBody');
+  function openDrawer(id){ var d = DATA[id]; if(!d) return; dsLabel.textContent = 'DATASHEET // ' + d.role.toUpperCase(); dsName.textContent = d.name; dsBody.textContent = d.body; drawer.classList.add('open'); backdrop.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); backdrop.classList.remove('open'); }
+  document.querySelectorAll('[data-comp]').forEach(function(b){ b.addEventListener('click', function(){ openDrawer(b.getAttribute('data-comp')); }); });
+  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeDrawer(); });
+</script>
+</body>
+</html>
