@@ -49,10 +49,10 @@ The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus
 
 * **Source:** Check the `/Firmware` folder for the main `.ino` or PlatformIO `main.cpp` files.
 
-## BOM (Bill of Materials) For genral components
+## BOM (Bill of Materials) For general components
 
 * [Seeed Studio XIAO ESP32-S3 Sense](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html)
-* [Bosch BMV080 Breakout]([https://www.sparkfun.com/sparkfun-air-quality-pm1-pm2-5-pm10-sensor-bmv080-qwiic.html])
+* [Bosch BMV080 Breakout](https://www.sparkfun.com/sparkfun-air-quality-pm1-pm2-5-pm10-sensor-bmv080-qwiic.html)
 * (I've designed the pod for specifically for SparkFun Air Quality Sensor - BMV080 breakout board but theres one more you can use -DFRobot Fermion BMV080, its almost the same size just slightly bigger which also include mounting holes)]
 * [Bosch BME688 Breakout](link)
 * **General PCB BOM:** [Link to JLCPCB CSV]
