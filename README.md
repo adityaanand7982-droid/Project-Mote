@@ -1,6 +1,5 @@
 # Project-Mote
-A high-altitude, open-source data collection payload engineered for drone deployment. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
-
+A high-altitude, open-source data collection drone engineered for measuring the microclimates across various places. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
 ## Custom Features 
 
 * **Venturi Airflow Dynamics:** Custom-engineered internal channeling prevents air stagnation, ensuring sensors sample live ambient air during flight and for proper thermal managment so that sensor and microcontroller heat doesnt interfare with the measurements.
@@ -13,15 +12,14 @@ A high-altitude, open-source data collection payload engineered for drone deploy
 I made this project with exactly core philosphy: It should be very reiliable, cheap and ready to go at anytime when needed and the hardware and software stacks operate in a continuous, synchronized cycle during flight.
 
 ### 1. Mechanical & Aerodynamic Integration
-* **Ram-Air Pumping:** The pod deliberately lacks internal fans. It relies entirely on the drone’s forward pitch and flight velocity to force ambient air through the custom 3D-printed venturi grilles. The drone's physical movement acts as the system's air pump, ensuring zero air stagnation.
+* The pod deliberately lacks internal fans. It relies entirely on the drone’s forward pitch and flight velocity to force ambient air through the custom 3D-printed venturi grilles. The drone's physical movement acts as the system's air pump, ensuring zero air stagnation.
 
 ### 2. The Data & Telemetry
 * **Microclimate Polling:** At few intervals, the "Cyber-Spider" PCB acts as the mission commander, pinging the onboard BME688 and BMV080 sensors over the I2C bus to capture a real-time snapshot of the immediate atmosphere.
 * **The Drone as an Antenna:** To strictly minimize mass, the pod carries no GPS hardware. Instead, the ESP32 is wired directly to the flight controller's serial port. It passively intercepts the drone’s native MAVLink telemetry stream, stripping out the live latitude, longitude, and altitude data.
 
-### 3. Command and Logging
-* **Reverse Camera Trigger:** The payload is not just a passive listener. The ESP32 sends a command packet *back* up to the flight controller, automatically triggering the drone's primary camera to take a visual record of the exact location being measured along with the time which itself runs on esp32.
-* **Synchronized SD Logging:** All drone coordinates and local air quality metrics are merged and written sequentially to `FLIGHT01.CSV` on the onboard MicroSD card on ESP32 board, which gives much better idea of the area along witht the exact visual to see how was the environment at the time when measurements were taken.
+### 3. Logging
+* All drone coordinates and local air quality metrics are merged and written sequentially to `FLIGHT01.CSV` on the onboard MicroSD card on ESP32 board, which gives much better idea of the area along witht the exact visual to see how was the environment at the time when measurements were taken.
   
 ## 3D Printing & Mechanical
 
@@ -31,7 +29,7 @@ The payload chassis was designed entirely from scratch in Onshape. It features a
 
 * **Print Settings:** I highly recommend Poly Carbonate(PC-ABS) for the battry encloser and the Sensor Pod for maintaining the weight low and provide the heat resistance and the necessery strength.
 * While Camera mount can be printed in normal TPU filament.
-* And as for frame itself i highly recommend CNC machining(3mm Carbon Fibre Sheet) instead of 3D printing.
+* And as for frame itself i highly recommend CNC machining(2mm or 3mm Carbon Fibre Sheet) instead of 3D printing.
 * **Production Files:** `.stl` and `.glb` files are located in the `/CAD` folder.
 
 ## PCB Design
@@ -46,7 +44,7 @@ The payload chassis was designed entirely from scratch in Onshape. It features a
 ## Firmware
 
 The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus initialization, and the continuous data-logging loop for the entire flight duration. 
-
+* It also initialises the esp to take the exact co-ordinates(from the drone's gps) of the measurements and everything is saved in .csv form.
 * **Source:** Check the `/Firmware` folder for the main `.ino` or PlatformIO `main.cpp` files.
 
 ## BOM (Bill of Materials) For general components
@@ -54,7 +52,7 @@ The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus
 * [Seeed Studio XIAO ESP32-S3 Sense](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html)
 * [Bosch BMV080 Breakout Board](https://www.sparkfun.com/sparkfun-air-quality-pm1-pm2-5-pm10-sensor-bmv080-qwiic.html)(I've designed the pod for specifically for SparkFun Air Quality Sensor - BMV080 breakout board but theres one more you can use -[DFRobot Fermion BMV080](https://www.dfrobot.com/product-3069.html), its almost the same size just slightly bigger which also include mounting holes)
 * [Bosch BME688 Breakout Board](https://7semi.com/bme688-environmental-sensor-breakout/)
-  NOTE: For the pod i've used the [ $\color{red}{\text{7semi BME688 Nano Breakout.}}$ ](https://7semi.com/bme688-environmental-sensor-nano-breakout-2-54mm-pitch-connector/) its much smaller version(its only 14mm by 12mm) with 2.54mm pitch distance and features only I2C bus connection while the one which i gave you the link have both I2C and SPI and is much larger(31mm by 19mm) which might or might not fit in the pod (i've tried fitting it into the pod in cad assambly and it looks little big in the chamber), and theres also one with much smaller pitch distance [this one](https://7semi.com/bme688-environmental-sensor-nano-breakout-1-27mm-pitch-header/) which has pitch of 1.27mm which is increadbly small and compact.
+  NOTE: For the pod i've used the $\color{red}{\text{7semi BME688 Nano Breakout}}$ ([this one](https://7semi.com/bme688-environmental-sensor-nano-breakout-2-54mm-pitch-connector/)) its much smaller version(its only 14mm by 12mm) with 2.54mm pitch distance and features only I2C bus connection while the one which i gave you the link have both I2C and SPI and is much larger(31mm by 19mm) which might or might not fit in the pod (i've tried fitting it into the pod in cad assambly and it looks little big in the chamber), and theres also one with much smaller pitch distance [this one](https://7semi.com/bme688-environmental-sensor-nano-breakout-1-27mm-pitch-header/) which has pitch of 1.27mm which is increadbly small and compact.
 * **General PCB BOM:**(the pcb bom)
 * 
 * ** NOTE: The frame, The pod, the camera encloser, the venturi airflow cavity and the Battry Encloser are custom designed from scratch by hand by me. NO AI used.
