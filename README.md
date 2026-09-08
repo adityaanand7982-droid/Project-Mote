@@ -52,11 +52,11 @@ The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus
 ## BOM (Bill of Materials) For general components
 
 * [Seeed Studio XIAO ESP32-S3 Sense](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html)
-* [Bosch BMV080 Breakout](https://www.sparkfun.com/sparkfun-air-quality-pm1-pm2-5-pm10-sensor-bmv080-qwiic.html)
-* (I've designed the pod for specifically for SparkFun Air Quality Sensor - BMV080 breakout board but theres one more you can use -[DFRobot Fermion BMV080](https://www.dfrobot.com/product-3069.html), its almost the same size just slightly bigger which also include mounting holes)]
-* [Bosch BME688 Breakout](link)
+* [Bosch BMV080 Breakout Board](https://www.sparkfun.com/sparkfun-air-quality-pm1-pm2-5-pm10-sensor-bmv080-qwiic.html)(I've designed the pod for specifically for SparkFun Air Quality Sensor - BMV080 breakout board but theres one more you can use -[DFRobot Fermion BMV080](https://www.dfrobot.com/product-3069.html), its almost the same size just slightly bigger which also include mounting holes)
+* [Bosch BME688 Breakout Board](https://7semi.com/bme688-environmental-sensor-breakout/)
+  NOTE: For the pod i've used the nano version [this one](https://7semi.com/bme688-environmental-sensor-nano-breakout-2-54mm-pitch-connector/) its much smaller version(its only 14*12mm) with 2.54mm pitch distance and features only I2C bus connection while the one which i gave you the link have both I2C and SPI and is much larger(31*19mm) which might(i've tried fitting it into the pod in cad assambly and it looks little big in the chamber) or might not fit in the pod, and theres also one with much smaller pitch distance [this one](https://7semi.com/bme688-environmental-sensor-nano-breakout-1-27mm-pitch-header/) which has pitch of 1.27mm which  
 * **General PCB BOM:** [Link to JLCPCB CSV]
-* ** NOTE: The frame, The pod, the camera encloser and the Battry Encloser are custom designed.
+* ** NOTE: The frame, The pod, the camera encloser, the venturi cavity and the Battry Encloser are custom designed.
 ## License
 
 This project is fully open-source and licensed under the MIT License.
