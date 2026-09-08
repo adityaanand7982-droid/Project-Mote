@@ -35,6 +35,7 @@ The payload chassis was designed entirely from scratch in Onshape. It features a
 * **Production Files:** `.stl` and `.glb` files are located in the `/CAD` folder.
 
 ## PCB Design
+<img width="2160" height="713" alt="2D_PCB" src="https://github.com/user-attachments/assets/62625b15-3040-47bc-abc4-9f3462d0d825" />
 
 <img width="2160" height="729" alt="PCB_PCB1_2026-09-07" src="https://github.com/user-attachments/assets/0299e733-5b0b-443b-bc24-d2a34fb54bfa" />
 
