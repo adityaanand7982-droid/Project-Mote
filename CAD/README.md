@@ -24,9 +24,9 @@ If you are replicating this build, follow these print settings for optimal fligh
 * **CNC & Modification:** The main frame(part 1) `.step` source file is also included for easy CAM toolpath generation or CAD remixing.
 
 ###  CAD Onshape Links(if you want to do extra tinkring for your own objectives) 
-* [Frame](https://cad.onshape.com/documents/05a52b95227481df21c4d61e/w/404adcbb2aa8a207a427e975/e/822eb19d10cc566edf78f8fc)
+* [Frame](https://cad.onshape.com/documents/05a52b95227481df21c4d61e/w/404adcbb2aa8a207a427e975/e/fc9ecd0ba1bdf88655c0819b)
 * [Pod](https://cad.onshape.com/documents/cd26c9afff5e10d9f9bc6e67/w/c80e0667bd276da188269a66/e/ebaad97bd10442b1b29f2ee8)
-* [Battery(1S)](https://cad.onshape.com/documents/b9a957a4efd11c345544f532/w/533336610b812f5b3d86bded/e/02fc169ee8b6c8001d00e674)
+* [Battery(1S)](https://cad.onshape.com/documents/9c970ded9a415cd9706bf943/w/092ee7e0a6caacbd8a13688f/e/7870bef7957e473026df0e82)
 * [Battery(2S)](https://cad.onshape.com/documents/b9a957a4efd11c345544f532/w/533336610b812f5b3d86bded/e/d314ea4a2c79227dc41efd6a)
 * [Camera Encloser](https://cad.onshape.com/documents/f9ba0b2f4cd3d33b59f0e158/w/f90ac1368fdbbf598d694e47/e/fa5613f01b504bd3c8a06d72)
 * [Pod Cover](https://cad.onshape.com/documents/ed6756b1f015da37f33ff3bd/w/7296c9ea6f9250048ba06707/e/54b66b59ead6eeb3fbd70992)
