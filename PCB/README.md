@@ -7,12 +7,12 @@ This directory contains the complete board design, schematics, and manufacturing
 * **Sensor Array:** 7Semi BME688 (Gas/Humidity/Temp/Pressure) & SparkFun Air Quality BMV080(PM1/PM2.5/PM10 Sensor) 
 * **Power Delivery:** Power from drone's own battery along with a capacitor to reduce electrical noise cleanly.
 
-### 🛠️ Design Specifications
+###  Design Specifications
 * Designed entirely from scratch in EasyEDA Pro(not standard). 
 * Absolutely NO ARTIFICIAL INTELLIGENCE was used in the making(except for autorouting of easyeda which was later done manually in few traces). 
 * Component placement was carefully optimized to keep the 7Semi BME688 Nano BME688 and SparkFun BMV080 breakouts in its desired place w.r.t the pod design and to thermally isolate it from the ESP32.
 
-### 📁 Manufacturing Files
+###  Manufacturing Files
 All PCB files for Project-Mote are located directly in this folder for easy access:
 
 * **Gerber Files:** Contained in the `PCB.zip` archive.
