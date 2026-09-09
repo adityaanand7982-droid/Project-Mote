@@ -31,5 +31,13 @@ If you are replicating this build, follow these print settings for optimal fligh
 * [Camera Encloser](https://cad.onshape.com/documents/f9ba0b2f4cd3d33b59f0e158/w/f90ac1368fdbbf598d694e47/e/fa5613f01b504bd3c8a06d72)
 * [Pod Cover](https://cad.onshape.com/documents/ed6756b1f015da37f33ff3bd/w/7296c9ea6f9250048ba06707/e/54b66b59ead6eeb3fbd70992)
 
+## Suggestions & Feedback
+ Got a structural optimization? Shaved a few grams off the CAD? Or did you just accidentally let the magic smoke out of your ESP32? 
+
+Whether you're improving the design or just sharing your own build, I'd love to hear about it. Ping me below!
+
+* **Lead Engineer:** Aryabhart Tenjuku
+* **Email:**  <img width="231" height="19" alt="Screenshot 2026-09-09 111004" src="https://github.com/user-attachments/assets/b5cdc591-932c-4863-81f4-0abbb6f327d4" />
+
   > **⚠️ FLIGHT & DEPLOYMENT WARNING**
 > This payload is rated for high-altitude microclimate tracking and extreme environments. It is *not* rated for deep-sea submersion or being used as a projectile against rival teams.
