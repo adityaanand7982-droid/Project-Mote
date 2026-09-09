@@ -3,7 +3,7 @@
 This directory contains the complete board design, schematics, and manufacturing files for the Project-Mote payload. The custom PCB acts as the central nervous system, housing the ESP32 microcontroller and cleanly routing our environmental sensor array (BME688 & BMV080) without the parasitic mass and unreliability of standard jumper wires.
 
 ###  Hardware Specifications
-* **Microcontroller:** XIAO ESP32-S3
+* **Microcontroller:** Seed Studio XIAO ESP32-S3
 * **Sensor Array:** 7Semi BME688 (Gas/Humidity/Temp/Pressure) & SparkFun Air Quality BMV080(PM1/PM2.5/PM10 Sensor) 
 * **Power Delivery:** Power from drone's own battery along with a capacitor to reduce electrical noise cleanly.
 
