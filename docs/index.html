@@ -220,30 +220,49 @@
   <div class="wrap" style="position:relative; z-index:10;">
     <div class="eyebrow mono reveal"><span class="meta">[01]</span><span class="bar" style="background:var(--red)"></span><span class="meta">SYSTEM CRITICAL</span></div>
     <h2 class="sec-title mono red text-glow-red reveal" style="color:var(--red);">// THE PROBLEM</h2>
+    
     <div class="grid">
-      <div class="img-wrap reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Real-time_Particulate_Matter_Sensor_%288118c90f-2657-48ca-8191-fc77de7a47cf%29.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled" alt="Rusted stationary weather station" />
-        <div class="grad"></div>
-        <div class="tag mono">◉ STATIONARY.SENSOR.PROBLEM</div>
+      
+      <!-- LEFT COLUMN (Both Images Stacked) -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- First Image: Stationary Sensor -->
+        <div class="img-wrap reveal">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Real-time_Particulate_Matter_Sensor_%288118c90f-2657-48ca-8191-fc77de7a47cf%29.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled" alt="Rusted stationary weather station" />
+          <div class="grad"></div>
+          <div class="tag mono">◉ STATIONARY.SENSOR.PROBLEM</div>
+        </div>
+
+        <!-- Second Image: Global Pollution Map -->
+        <div class="img-wrap reveal">
+          <img src="https://github.com/adityaanand7982-droid/Project-Mote/blob/main/Global%20air%20pollution%20map.jpg" alt="Global Air Pollution Map" />
+          <div class="grad"></div>
+          <div class="tag mono">◉ GLOBAL.AQI.CRISIS</div>
+        </div>
+
       </div>
+
+      <!-- RIGHT COLUMN (The ERR Logs) -->
       <div>
         <article class="err-log glow-red reveal-x">
           <div class="code mono"><span class="dot"></span>ERR-01</div>
           <h3 class="mono">High Cost &amp; Fixed Locations</h3>
           <p class="mono">Professional pollution meters cost thousands of dollars and are strictly stationary. They can only measure the exact spot they are bolted to.</p>
         </article>
+        
         <article class="err-log glow-red reveal-x">
           <div class="code mono"><span class="dot"></span>ERR-02</div>
           <h3 class="mono">Approximations vs. Reality</h3>
-          <p class="mono">While you can check pollution levels on weather apps or Google/Apple Maps, that data is based on broad regional assumptions and approximations, not true ground-level measurements.I'm building a high-altitude data collection tool, not a smart thermostat..</p>        </article>
-     <article class="err-log glow-red reveal-x">
+          <p class="mono">While you can check pollution levels on weather apps or Google/Apple Maps, that data is based on broad regional assumptions and approximations, not true ground-level measurements.I'm building a high-altitude data collection tool, not a smart thermostat..</p>        
+        </article>
+        
+        <article class="err-log glow-red reveal-x">
           <div class="code mono"><span class="dot"></span>ERR-03</div>
           <h3 class="mono">My Country &amp; Pollution Problem and Systemic Manipulation</h3>
-          <p class="mono">A massive problem that is often ignored in my home country is that I live among some of the top 10 most polluted cities in the world. Imagine trying to live a normal life with a daily AQI of 600+. As a matter of fact, simply breathing this air daily is more harmful than smoking. 
-
-Yet, authorities ignore the reality, and when questioned, they provide manipulated data. Millions of people rely on mobile apps and public AQI meters for their health, but those readings are being actively altered. Right now, as we speak, water is being purposefully sprayed over public sensors to artificially suppress the readings and make the air look far cleaner than it actually is (for obvious reasons).</p>
-     
+          <p class="mono">A massive problem that is often ignored in my home country is that I live among some of the top 10 most polluted cities in the world. Imagine trying to live a normal life with a daily AQI of 600+. As a matter of fact, simply breathing this air daily is more harmful than smoking. <br><br>Yet, authorities ignore the reality, and when questioned, they provide manipulated data. Millions of people rely on mobile apps and public AQI meters for their health, but those readings are being actively altered. Right now, as we speak, water is being purposefully sprayed over public sensors to artificially suppress the readings and make the air look far cleaner than it actually is (for obvious reasons).</p>
+        </article>
       </div>
+      
     </div>
   </div>
 </section>
