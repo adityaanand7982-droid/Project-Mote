@@ -38,8 +38,8 @@ The payload chassis was designed entirely from scratch in Onshape. It features a
 
 
 * **The brain of the payload(Pod) is a custom-routed EasyEDA carrier board designed specifically for the **Seeed Studio XIAO ESP32-S3 Sense**. 
-* **Production Files:** Gerber files and the CPL are available in the `/Releases` tab.
-* **Schematics:** View the full wiring diagram in the `/Hardware` folder.
+* **Production Files:** Gerber files and the CPL are available in the `/PCB` tab.
+* **Schematics:** View the full wiring diagram in the `/PCB` folder.
 
 ## Firmware
 
