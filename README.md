@@ -1,11 +1,22 @@
 # Project-Mote
 A high-altitude, open-source data collection drone engineered for measuring the microclimates across various places. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
+> ACCESS MISSION WEBSITE: <svg width="100%" height="120" viewBox="0 0 600 120" xmlns="http://w3.org">
+  <!-- Bright Cyan Background -->
+  <rect width="100%" height="100%" fill="#00F3FF" rx="4"/>
 
-<br>
-<a href="https://adityaanand7982-droid.github.io/Project-Mote/">
-  <kbd>▰▰▰ INITIATE SYSTEM OVERRIDE: ACCESS MISSION LOG ▰▰▰</kbd>
-</a>
-<br><br>
+  <!-- Centered Dark Text and Rhombuses -->
+  <text x="80%" y="54%" 
+        dominant-baseline="middle" 
+        text-anchor="middle" 
+        fill="#060b11" 
+        font-family="Consolas, 'Courier New', Courier, monospace" 
+        font-size="22px" 
+        font-weight="bold" 
+        letter-spacing="2px">
+    [▰▰ INITIATE SYSTEM OVERRIDE ▰▰](https://adityaanand7982-droid.github.io/Project-Mote/)
+  </text>
+</svg>
+
 ## Custom Features 
 
 * **Venturi Airflow Dynamics:** Custom-engineered internal channeling prevents air stagnation, ensuring sensors sample live ambient air during flight and for proper thermal managment so that sensor and microcontroller heat doesnt interfare with the measurements.
