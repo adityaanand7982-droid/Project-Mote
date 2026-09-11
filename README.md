@@ -1,5 +1,6 @@
 # Project-Mote
 A high-altitude, open-source data collection drone engineered for measuring the microclimates across various places. It replaces heavy, expensive stationary microclimate rigs with a lightweight, 3D-printable pod designed to capture real-time environmental telemetry.
+[PROJECT MOTE](https://adityaanand7982-droid.github.io/Project-Mote/)
 ## Custom Features 
 
 * **Venturi Airflow Dynamics:** Custom-engineered internal channeling prevents air stagnation, ensuring sensors sample live ambient air during flight and for proper thermal managment so that sensor and microcontroller heat doesnt interfare with the measurements.
