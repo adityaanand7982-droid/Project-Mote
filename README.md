@@ -62,7 +62,7 @@ The payload chassis was designed entirely from scratch in Onshape. It features a
 
 The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus initialization, and the continuous data-logging loop for the entire flight duration. 
 * It also initialises the esp32 s3 sense to take the exact co-ordinates(from the drone's gps) of the measurements and everything is saved in .csv form on on board sdcard.
-* it also do preflight checkups and snaps a timestamped JPEG from onboard camera during flight and when measurement arrives. 
+* it also do preflight checkups and snaps a timestamped JPEG from onboard camera when measurement arrives during flight. 
 * **Source:** Check the `/Firmware` folder for the main `.ino`files.
 
 ## BOM (Bill of Materials) For general components
