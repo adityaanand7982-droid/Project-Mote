@@ -171,7 +171,8 @@ Single peripheral failure never takes down the rest.
 
 - `ProjectMote.ino` — main firmware sketch
 - `camera_pins.h` — OV2640 pin mappings for the XIAO ESP32S3 Sense
-  
+>## AI
+>No its not an ai generated, its written and while ai was used here but it was strictly used for debugging and how to fix an error and not for whole code generated. and yes i used the ai to refine my repo *not generate it but refine it* and how to make it easier to read. 
 ## Suggestions & Feedback
 
 Open an issue or PR on the repo. Firmware bugs and hardware compatibility
