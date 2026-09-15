@@ -27,5 +27,5 @@ Any Suggestions? or new ideas? or new things to add? I'd love to hear it.
 * **Email:** <img width="231" height="19" alt="Screenshot 2026-09-09 111004" src="https://github.com/user-attachments/assets/28e727ef-a86c-48bf-8be5-11573a2be982" />
 
 
-> **⚠️ ASSEMBLY WARNING**
+> **ASSEMBLY WARNING**
 > Please double-check the polarity of the main battery lead before connecting power. Reversing the polarity will instantly convert the ESP32 into a very brief, expensive, and highly toxic light-emitting diode(not ideal for lungs and vibe tbh).
