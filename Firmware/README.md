@@ -178,3 +178,7 @@ Open an issue or PR on the repo. Firmware bugs and hardware compatibility
 notes are welcome.
 * ** Lead Engineer: Aryabharta Tenjuku
 * ** Email:<img width="231" height="19" alt="email" src="https://github.com/user-attachments/assets/14993efc-37d6-41a4-9da8-2d3e5d72ae48" />
+>  **RUNTIME WARNING:** Rated for continuous autonomous logging across an
+> entire flight with zero operator input, graceful sensor degradation, and
+> power-loss-safe file writes.This firmware will run perfectly fine with a dead,
+> missing, or exFAT-formatted SD card — you just won't find out until you land.
