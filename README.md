@@ -72,27 +72,26 @@ The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus
 * [Bosch BME688 Breakout Board](https://7semi.com/bme688-environmental-sensor-breakout/)
   NOTE: For the pod i've used the $\color{red}{\text{7semi BME688 Nano Breakout}}$ ([this one](https://7semi.com/bme688-environmental-sensor-nano-breakout-2-54mm-pitch-connector/)) its much smaller version(its only 14mm by 12mm) with 2.54mm pitch distance and features only I2C bus connection while the one which i gave you the link have both I2C and SPI and is much larger(31mm by 19mm) which might or might not fit in the pod (i've tried fitting it into the pod in cad assambly and it looks little big in the chamber), and theres also one with much smaller pitch distance [this one](https://7semi.com/bme688-environmental-sensor-nano-breakout-1-27mm-pitch-header/) which has pitch of 1.27mm which is increadbly small and compact.
 * ** NOTE: The frame, The pod, the camera encloser, the venturi airflow cavity and the Battry Encloser are custom designed from scratch by hand by me. NO AI used.
-## What's Coming Next
-
-The full build guide and setup walkthrough is still in progress. When it's
-ready, it will cover everything end-to-end:
-
-- **Assembly and build** — step-by-step 
-- **Firmware setup from scratch** — Arduino IDE, board settings, library
-  installation, and the Bosch BMV080 SDK workaround
-- **Calibration and first-flight checklist**
-
-Once the payload has flown, I'll also publish the actual results — raw
-sensor logs, CSV samples, and captured imagery — so anyone can see what
-the hardware is really capable of before they commit to building one.
-
 
 ## ANY SUGGESTIONS 
 * if you've any suggestions or improvment on designs 
 *  Lead Engineer: ARYABHARTA TENJUKU
 *  Email: <img width="231" height="19" alt="email" src="https://github.com/user-attachments/assets/9174bf8c-0cf7-4cbf-870b-5e195d333ad7" />
 
-
 ## License
-
 This project is fully open-source and licensed under the MIT License.
+
+## IDK
+>## Roadmap
+>The full build guide and setup walkthrough is still in progress. When it's
+ready, it will cover everything end-to-end:
+
+>- **Assembly and build** — step-by-step 
+>- **Firmware setup from scratch** — Arduino IDE, board settings, library
+>  installation, and the Bosch BMV080 SDK workaround
+>- **Calibration and first-flight checklist**
+>Once the payload has flown, I'll also publish the actual results — raw
+>sensor logs, CSV samples, and captured imagery — so anyone can see what
+>the hardware can do before they commit to building one.
+>This is a solo project, so progress moves at its own pace — no fixed timeline.
+
