@@ -39,5 +39,5 @@ Whether you're improving the design or just sharing your own build, I'd love to 
 * **Lead Engineer:** Aryabhart Tenjuku
 * **Email:**  <img width="231" height="19" alt="Screenshot 2026-09-09 111004" src="https://github.com/user-attachments/assets/b5cdc591-932c-4863-81f4-0abbb6f327d4" />
 
-  > ** FLIGHT & DEPLOYMENT WARNING**
+>**FLIGHT & DEPLOYMENT WARNING:**
 > This payload is rated for high-altitude microclimate tracking and extreme environments. It is *not* rated for deep-sea submersion or being used as a projectile against rival teams.
