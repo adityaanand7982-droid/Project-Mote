@@ -84,7 +84,7 @@ This project is fully open-source and licensed under the MIT License.
 ## IDK
 >## Roadmap
 >The full build guide and setup walkthrough is still in progress. When it's
-ready, it will cover everything end-to-end:
+ready, it will cover:
 
 >- **Assembly and build** — step-by-step 
 >- **Firmware setup from scratch** — Arduino IDE, board settings, library
