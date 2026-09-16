@@ -12,11 +12,11 @@ The chassis is made to house the environmental sensors (Bosch BME688 & BMV080), 
 If you are replicating this build, follow these print settings for optimal flight performance:
 
 * Materials:
-  * Battery Enclosure & Sensor Pod:** I highly recommend Polycarbonate (PC-ABS) for maintaining low weight while providing heat resistance and necessary strength.
+  * Battery Enclosure & Sensor Pod:** I highly recommend Polycarbonate (PC-ABS) or if thats not an option then PA12-CFis the second for maintaining low weight while providing heat resistance and necessary strength.
   * Camera Mount: Can be printed in normal TPU filament.
-  * Main Frame: I highly recommend CNC machining (2mm or 3mm Carbon Fibre Sheet) instead of 3D printing.
+  * Main Frame: I highly recommend CNC machining (2mm or 3mm Carbon Fibre Sheet) instead of 3D printing or if you cant find the CF custom cnc then you can go for FR4.
 * Infill: 20% - 30% Gyroid for the best strength-to-weight ratio.
-* Supports: Tree/Organic supports recommended for the sensor mounting overhangs.
+* Supports: Tree/Organic supports recommended.
 * Orientation: Print flat as oriented in the STL files to ensure layer lines align with the main stress axes.
 
 ### File Structure
