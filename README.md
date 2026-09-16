@@ -80,18 +80,3 @@ The firmware is written in C++ and handles the pre-flight sensor checks, I2C bus
 
 ## License
 This project is fully open-source and licensed under the MIT License.
-
-## IDK
->## Roadmap
->The full build guide and setup walkthrough is still in progress. When it's
-ready, it will cover:
-
->- **Assembly and build** — step-by-step 
->- **Firmware setup from scratch** — Arduino IDE, board settings, library
->  installation, and the Bosch BMV080 SDK workaround
->- **Calibration and first-flight checklist**
->Once the payload has flown, I'll also publish the actual results — raw
->sensor logs, CSV samples, and captured imagery — so anyone can see what
->the hardware can do before they commit to building one.
->This is a solo project, so progress moves at its own pace — no fixed timeline.
-
