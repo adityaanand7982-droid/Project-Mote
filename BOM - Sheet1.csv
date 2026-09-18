@@ -1,0 +1,21 @@
+Item Name,Qty,Price (total) (USD),Item link,Notes
+Flywoo Goku F405 HD AIO V2,1,69.99,https://flywoo.net/products/goku-f405-hd-1-2s-elrs-aio-v2,Drone flight controller 
+T-Motor F1404 (4600KV),4,78.8,https://robokits.co.in/multirotor-spare-parts/tiger-motor-esc-and-propeller/t-motor-motor/f-type/t-motor-f1404-kv4600,"Drone motor, earlier i thought of using different motor(RCinPower 1303 11500kv) but it was simply not powerful enough to lift whole drone neither the whole drone body itself"
+TBS Unify Pro32 Nano VTX,1,35.44,https://www.quadkart.in/tbs-unify-pro32-nano-5g8-v1-1/,For video transferring from drone camera to ground unit(i.e. pilot)
+HGLRC M100 Mini GPS,1,16.67,https://www.quadkart.in/hglrc-m100-mini-gps/,i used this one simply beccause of its size 
+RunCam Split 4 V3,1,89,https://shop.runcam.com/runcam-split-4-v3/,i used this one because its great for post flight analysis of the environment i.e. when the measurement were taken and during the flight for video quality
+Seed Studio XIAO ESP32-S3 Sense,1,13.5,https://in.element14.com/seeed-studio/113991115/development-board-32bit-xtensa/dp/4200197,Pod brain and data logger with its board
+7Semi BME688 Nano Breakout with pitch 2.54mm,1,10.52,https://evelta.com/7semi-bme688-environmental-sensor-nano-breakout-2-54mm-pitch-header/,"i used this one due to its size and i made the pod 2nd encloser based on this size, its pitch distance is 2.54mm "
+SparkFun Air Quality BMV080,1,59.95,https://www.sparkfun.com/products/26554,this sensor uses laser to measure the pollountents in air upto PM10(which is great tbh)
+Flywoo Explorer 2S 18650 Pack,1,20,https://flywoo.net/products/flywoo-explorer-molicell-p30b-18650-2s1p-3000mah-lionpack-battery,its a 2S 18650 battery pack for more power delivery and better flight time
+XT30UP Power Cable & Filter Cap,1,1,https://robu.in/product/safeconnect-xt-30-male-16awg-20cm-connector-pigtail-cable/,to connect the power and to power the pcb of pod
+Custom PCB,1,5,https://github.com/adityaanand7982-droid/Project-Mote/tree/main/PCB,i made pcb to keep everything neat and clean and keep the size as small as possible with neatly fitting in the pod
+Custom 3D printable files,1,18,https://github.com/adityaanand7982-droid/Project-Mote/tree/main/CAD,"it includes printable parts(pod, pod cover, camera encloser, battry encloser)"
+Drone Frame (3mm FR4),1,25,https://github.com/adityaanand7982-droid/Project-Mote/tree/main/CAD/Part%201(Frame),i wasn't able to find the carbon fibre sheet cnc service neither on any websites or locals so after few researchs I decided to go with FR4 which can be easily sourced from jlcpcb and pcbway
+Gemfan 3018 Props bi blade ,1,3.74,https://www.uavmarketplace.in/products/gemfan-3018-hurricane-pc-4l4r-2-blade-propeller/895789000000939622,"Standard 8-Pack (4 CW + 4 CCW) for flying, now the reason i went with 2 blades rather than 3 blades, coz 2 blades simply are more energy efficent than 3 blades"
+TrueRC Singularity 5.8GHz Ant( U.FL / RHCP),1,20,https://truerc.com/71966-72167-singularity-58-ufl#/153-polarization-rhcp/469-connector_cable-ufl_regular_72mm,"Norma video antenna for drone(MUST BE SAME AS RECIVER, here i choose RHCP)"
+Metric Fastener Array Kit,1,12,https://www.amazon.in/Standoff-Mounting-Screws-Gigabyte-Motherboards/dp/B0DG2873WB,miscellinous but important stuffs like mountings the flight controllers 
+1N5819 Schottky Diode,1,0.03,https://robu.in/product/1n5819-1w-diode-pack-of-30,it prevents backward flow of current from esp to drone's battry if plugged into esp32 for post flight data analysis
+Rubber standoffs,2,1,https://evelta.com/4pc-m2-anti-vibration-rubber-shock-absorber-ball/,For vibration damping
+Threadlocker,1,8.32,https://www.amazon.in/Permatex-24010-Strength-Threadlocker-Applicator/dp/B000HBM564,"For locking the screws, so it won't fall out from vibrations."
+Battery Strap,1,0.6,https://robu.in/product/20cm-lipo-battery-strap-belt-reusable-cable-tie-wrap/,For holding the battery 
